@@ -9,16 +9,15 @@ import bcrypt
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-change-me')
 
-# DATABASE CONFIG – CRITICAL FIX FOR psycopg3
+# DATABASE CONFIG – FINAL FIX FOR psycopg3 (December 2025)
 db_url = os.environ.get('DATABASE_URL')
 
 if db_url:
-    # Force SQLAlchemy to use psycopg3 driver (not psycopg2!)
+    # CRITICAL: Force psycopg3 driver – this stops SQLAlchemy from trying to import psycopg2
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url.replace(
-        'postgres://', 'postgresql+psycopg://', 1
+        'postgres://', 'postgresql+psycopg://'
     )
 else:
-    # Local dev fallback
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 
 db.init_app(app)
