@@ -12,7 +12,8 @@ app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-change-me')
 # DB Config (Render Postgres or local SQLite)
 db_url = os.environ.get('DATABASE_URL')
 if db_url:
-    app.config['SQLALCHEMY_DATABASE_URI'] = db_url.replace('postgres://', 'postgresql://')
+    # Fix for psycopg3: Use postgresql+psycopg dialect (not default psycopg2)
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_url.replace('postgres://', 'postgresql+psycopg://')
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
