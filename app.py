@@ -52,10 +52,10 @@ def index():
     if q:
         base = base.filter(Todo.text.ilike(f'%{q}%'))
 
-    # FIXED: use date literal instead of string
+    # FIXED: added missing closing parenthesis + import text
     todos = base.order_by(
         Todo.complete.asc(),
-        db.func.coalesce(Todo.due_date, text("'9999-12-31'::date"))
+        db.func.coalesce(Todo.due_date, text("'9999-12-31'::date")),
         Todo.id.desc()
     ).all()
 
