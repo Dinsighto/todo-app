@@ -1,4 +1,4 @@
-# Ultimate Todo App 2025
+# Todo App 2025
 
 A full-featured, multi-user todo application built with a clean, modern vibe-coding approach — minimal dependencies, maximum functionality.
 
