@@ -57,7 +57,6 @@ ultimate-todo-app/
 └── utils/
 └── email.py        → Resend email integration module
 
-text
 ### Local Development (Windows)
 
 cd C:\path\to\ultimate-todo-app
